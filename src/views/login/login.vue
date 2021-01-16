@@ -6,7 +6,7 @@
         <h2 class="title">在线协作项目管理系统（测试）</h2>
       </div>
 
-      <el-form-item prop="name">
+      <el-form-item prop="email">
         <span class="svg-container">
           <svg-icon icon-class="email"/>
         </span>
