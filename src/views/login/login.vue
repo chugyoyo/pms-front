@@ -3,10 +3,10 @@
     <el-form ref="elForm" :model="elForm" :rules="rules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h2 class="title">在线协作项目管理系统</h2>
+        <h2 class="title">在线协作项目管理系统（测试）</h2>
       </div>
 
-      <el-form-item prop="username">
+      <el-form-item prop="name">
         <span class="svg-container">
           <svg-icon icon-class="email"/>
         </span>
@@ -40,7 +40,7 @@
       <el-form-item prop="verificationCode" style="width: 100%;">
         <el-input placeholder="验证码" v-model="elForm.verificationCode"/>
         <span class="image-container">
-          <el-image v-if="isRouterAlive" ref="verificationCodeImg" :src="verificationCodeURL"
+          <img v-if="isRouterAlive" ref="verificationCodeImg" :src="verificationCodeURL"
                     @click="renewVerificationCode" title="看不清？换一张"/>
         </span>
       </el-form-item>
