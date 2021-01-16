@@ -34,11 +34,11 @@
           name="password"
           tabindex="2"
           auto-complete="off"
-          @keyup.enter.native="submitForm"
         />
       </el-form-item>
       <el-form-item prop="verificationCode" style="width: 100%;">
-        <el-input placeholder="验证码" v-model="elForm.verificationCode"/>
+        <!--回车即提交-->
+        <el-input placeholder="验证码" v-model="elForm.verificationCode" @keyup.enter.native="submitForm"/>
         <span class="image-container">
           <img v-if="isRouterAlive" ref="verificationCodeImg" :src="verificationCodeURL"
                     @click="renewVerificationCode" title="看不清？换一张"/>
@@ -64,7 +64,7 @@ export default {
     const validatePassword = (rule, value, callback) => {
       const regex = /^[A-Za-z0-9$!?@#%^&]{6,20}$/g
       if (!regex.test(value)) {
-        callback(new Error('密码只能由字母、数字、$、?、!、@、#、%、^、&构成,最少6位最高20位！'))
+        callback(new Error('密码格式错误！'))
       } else {
         callback()
       }
@@ -138,6 +138,8 @@ export default {
           }).catch((err) => {
             this.$message.error(err.message)
             this.renewVerificationCode();
+            this.elForm.password = ''
+            this.elForm.verificationCode = ''
             this.loading = false
           })
         } else {

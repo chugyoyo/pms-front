@@ -148,9 +148,7 @@ export default {
       this.sendEmailDisabled = true
       sendEmailCode(this.elForm).then(res => {
         this.$message.success('发送邮箱验证码成功！')
-      }).catch(err => {
-        this.$message.error('发送邮箱验证码失败:' + err)
-      }).finally( () => {
+        // 倒计时
         let clock = window.setInterval(() => {
           this.sendEmailWaitTime--
           this.sendEmailContent = this.sendEmailWaitTime + 's后重新发送'
@@ -161,6 +159,9 @@ export default {
             clearInterval(clock)
           }
         }, 1000)
+      }).catch(err => {
+        this.$message.error('发送邮箱验证码失败:' + err)
+        this.sendEmailDisabled = false
       })
     },
     submitForm() {
